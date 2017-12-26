@@ -40,6 +40,36 @@ class User extends Model {
   tweets () {
     return this.hasMany('App/Models/Tweet')
   }
+
+  /**
+   * A user can have many followers.
+   *
+   * @method followers
+   *
+   * @return {Object}
+   */
+  followers () {
+    return this.belongsToMany(
+      'App/Models/User',
+      'user_id',
+      'follower_id'
+    ).pivotTable('followers')
+  }
+
+  /**
+   * A user can follow many other users.
+   *
+   * @method following
+   *
+   * @return {Object}
+   */
+  following () {
+    return this.belongsToMany(
+      'App/Models/User',
+      'follower_id',
+      'user_id'
+    ).pivotTable('followers')
+  }
 }
 
 module.exports = User
