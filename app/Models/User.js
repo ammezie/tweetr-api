@@ -29,6 +29,17 @@ class User extends Model {
   tokens () {
     return this.hasMany('App/Models/Token')
   }
+
+  /**
+   * A user can post many tweets as possible.
+   *
+   * @method tweets
+   *
+   * @return {Object}
+   */
+  tweets () {
+    return this.hasMany('App/Models/Tweet')
+  }
 }
 
 module.exports = User
