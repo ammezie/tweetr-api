@@ -29,6 +29,10 @@ Route.get('/tweets/:id', 'TweetController.show')
 Route.post('/tweets/reply/:id', 'TweetController.reply').middleware([
   'auth:jwt'
 ])
+// Delete tweet
+Route.delete('/tweets/destroy/:id', 'TweetController.destroy').middleware([
+  'auth:jwt'
+])
 
 // tweet reactions
 Route.group(() => {
