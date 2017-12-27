@@ -221,6 +221,36 @@ class UserController {
       })
     }
   }
+
+  /**
+   * Users to follow
+   *
+   * @method usersToFollow
+   *
+   * @param  {Object} params
+   * @param  {Object} auth
+   * @param  {Object} response
+   *
+   * @return {JSON}
+   */
+  async usersToFollow ({ params, auth, response }) {
+    // get currently authenticated user
+    const user = auth.current.user
+
+    // get the IDs of users the currently authenticated user is already following
+    const usersAlreadyFollowing = await user.following().ids()
+
+    // fetch users the currently authenticated user is not already following
+    const usersToFollow = await User.query()
+      .whereNot('id', user.id)
+      .whereNotIn('id', usersAlreadyFollowing)
+      .pick(3)
+
+    return response.json({
+      status: 'success',
+      data: usersToFollow
+    })
+  }
 }
 
 module.exports = UserController
