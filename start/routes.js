@@ -30,5 +30,13 @@ Route.post('/tweets/reply/:id', 'TweetController.reply').middleware([
   'auth:jwt'
 ])
 
+// tweet reactions
+Route.group(() => {
+  // favorite tweet
+  Route.post('/create', 'FavoriteController.favorite')
+})
+  .prefix('favorites')
+  .middleware(['auth:jwt'])
+
 // User profile
 Route.get(':username', 'UserController.showProfile')
