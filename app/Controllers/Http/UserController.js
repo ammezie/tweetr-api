@@ -275,6 +275,30 @@ class UserController {
       data: null
     })
   }
+
+  /**
+   * Unfollow a user
+   *
+   * @method unFollow
+   *
+   * @param  {Object} params
+   * @param  {Object} auth
+   * @param  {Object} response
+   *
+   * @return {NULL}
+   */
+  async unFollow ({ params, auth, response }) {
+    // get currently authenticated user
+    const user = auth.current.user
+
+    // remove from user's followers
+    await user.following().detach(params.id)
+
+    return response.json({
+      status: 'success',
+      data: null
+    })
+  }
 }
 
 module.exports = UserController
