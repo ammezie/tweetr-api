@@ -13,6 +13,17 @@ class Favorite extends Model {
   tweet () {
     return this.belongsTo('App/Models/Tweet')
   }
+
+  /**
+   * A favorite is for a user.
+   *
+   * @method user
+   *
+   * @return {Object}
+   */
+  user () {
+    return this.belongsTo('App/Models/User')
+  }
 }
 
 module.exports = Favorite

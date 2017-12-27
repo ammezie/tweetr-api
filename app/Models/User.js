@@ -70,6 +70,17 @@ class User extends Model {
       'user_id'
     ).pivotTable('followers')
   }
+
+  /**
+   * A user can have many favorite tweets.
+   *
+   * @method favorites
+   *
+   * @return {Object}
+   */
+  favorites () {
+    return this.hasMany('App/Models/Favorite')
+  }
 }
 
 module.exports = User
