@@ -251,6 +251,30 @@ class UserController {
       data: usersToFollow
     })
   }
+
+  /**
+   * Follow a user
+   *
+   * @method follow
+   *
+   * @param  {Object} request
+   * @param  {Object} auth
+   * @param  {Object} response
+   *
+   * @return {NULL}
+   */
+  async follow ({ request, auth, response }) {
+    // get currently authenticated user
+    const user = auth.current.user
+
+    // add to user's followers
+    await user.following().attach(request.input('user_id'))
+
+    return response.json({
+      status: 'success',
+      data: null
+    })
+  }
 }
 
 module.exports = UserController
