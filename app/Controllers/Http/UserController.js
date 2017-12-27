@@ -35,6 +35,37 @@ class UserController {
       })
     }
   }
+
+  /**
+   * Handles user authentication
+   *
+   * @method login
+   *
+   * @param  {Object} request
+   * @param  {Object} auth
+   * @param  {Object} response
+   *
+   * @return {String|JSON}
+   */
+  async login ({ request, auth, response }) {
+    try {
+      // validate the user credentials and generate a JWT token
+      const token = await auth.attempt(
+        request.input('email'),
+        request.input('password')
+      )
+
+      return response.json({
+        status: 'success',
+        data: token
+      })
+    } catch (error) {
+      response.status(400).json({
+        status: 'error',
+        message: 'Invalid email/password'
+      })
+    }
+  }
 }
 
 module.exports = UserController
