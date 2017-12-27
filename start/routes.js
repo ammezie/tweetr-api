@@ -16,6 +16,7 @@ Route.group(() => {
   .middleware(['auth:jwt'])
 
 Route.group(() => {
+  Route.get('/timeline', 'UserController.timeline')
   Route.get('/users_to_follow', 'UserController.usersToFollow')
   Route.post('/follow', 'UserController.follow')
   Route.delete('/unfollow/:id', 'UserController.unFollow')
