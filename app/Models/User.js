@@ -88,6 +88,17 @@ class User extends Model {
   favorites () {
     return this.hasMany('App/Models/Favorite')
   }
+
+  /**
+   * A user can post many replies to a tweet.
+   *
+   * @method replies
+   *
+   * @return {Object}
+   */
+  replies () {
+    return this.hasMany('App/Models/Reply')
+  }
 }
 
 module.exports = User
